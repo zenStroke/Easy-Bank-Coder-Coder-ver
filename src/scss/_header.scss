@@ -1,0 +1,114 @@
+@use "variables" as v;
+@use "animations" as a;
+
+.header {
+
+    //Hamburger Open Styles
+    //&. refers to nested styles. Styles in the child style are added when and only when the parent style and child style are added as classes.
+    &.open {
+
+        .overlay {}
+
+        .header__menu {
+            > span:first-child {
+                transform: rotate(45deg);
+                // transform-origin: top left;
+            }
+            
+            > span:nth-child(2) {
+                opacity: 0;
+            }
+    
+            > span:last-child {
+                transform: rotate(-45deg);
+                // transform-origin: bottom left;
+            }
+        }
+    }
+
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 3.75rem;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        background-image: linear-gradient(v.$darkBlue, transparent);
+    }
+
+    nav {
+        padding: 1.0625rem 1.5rem;
+    }
+
+    &__logo {
+
+        img {
+            width: 8.8125rem;
+            height: 1.375rem;
+        }
+
+    }
+
+    &__menu { //Mobile menu
+
+        > span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background-color: v.$darkBlue;
+            transition: all 300ms ease-in-out;
+            transform-origin: 3px 1px;
+
+            &:not(:last-child) {
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    &__links {
+
+        a {
+            position: relative;
+            font-size: v.$font-sm;
+            color: v.$grayishBlue;
+            transition: color 300ms ease-in-out;
+
+            &:not(:last-child){
+                margin-right: 32px;
+            }
+
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                height: 5px;
+                left: 0;
+                right: 0;
+                bottom: -30px;
+                background: linear-gradient(to right, hsl(136, 65%, 51%), hsl(192, 70%, 51%));
+                opacity: 0;
+                transition: opacity 300ms ease-in-out;
+            }
+
+            &:hover {
+                color: v.$darkBlue;
+
+                &::before {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &__cta {
+        font-size: 0.875rem;
+        color: v.$white;
+        transition: opacity 300ms ease-in-out;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+}
+
